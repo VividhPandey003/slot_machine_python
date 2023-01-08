@@ -7,7 +7,7 @@ MIN_BET = 1
 ROWS = 3
 COLS = 3
 
-symbol_count ={
+symbol_count = {
     "A": 2,
     "B": 4,
     "C": 6,
@@ -31,11 +31,19 @@ def get_slot_machine_spin(rows, cols, symbols):
             value = random.choice(current_symbols)
             current_symbols.remove(value)
             column.append(value)
-        
+
         columns.append(column)
-    
+
     return columns
-     
+
+
+def print_slot_machine(columns):
+    for row in range(len(columns[0])):
+        for i, column in enumerate(columns):
+            if i != len(columns)-1:  # maximum index we have is len(cols)-1
+                print(column[row], end="  |  ")
+            else:
+                print(column[row], end="")
 
 
 def deposit():
@@ -96,6 +104,9 @@ def main():
 
     print(
         f"You are betting ₹{bet} on {lines} lines. Total bet is equal to ₹{total_bet}")
+
+    slots = get_slot_machine_spin(ROWS, COLS, symbol_count)
+    print_slot_machine(slots)
 
 
 main()
